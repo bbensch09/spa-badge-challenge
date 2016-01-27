@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Person.delete_all
+Badge.delete_all
+
 people = ["Anne","Derek","Hunter","Jen","Julian","Sarah","Shambhavi","Walker"]
 
 
@@ -13,7 +16,16 @@ people.each do |name|
   Person.create!(name: name)
 end
 
-# badges = []
-# 100.times do
+def unique_badge
+  {
+    text: Faker::Hacker.say_something_smart,
+    person_id: rand(1..8)
+  }
+end
+
+100.times do
+  Badge.create!(unique_badge)
+end
+
 
 puts "DB seeded!!!!!!!!!!!"

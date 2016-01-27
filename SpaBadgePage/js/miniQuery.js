@@ -1,5 +1,3 @@
-
-
 var miniQuery = (function(){
   var exports = {}
   exports.select = function (selector){

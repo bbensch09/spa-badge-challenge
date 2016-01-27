@@ -5,8 +5,10 @@ class PersonsController < ApplicationController
   end
 
   def show
-    @person = Person.find(:id)
-    render json: @person
+    person = Person.find(params[:id])
+    @badges = person.badges
+    p @badges
+    render json: @badges
   end
 end
 

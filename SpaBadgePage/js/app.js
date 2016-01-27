@@ -6,13 +6,13 @@ $.ready(function(){
 });
 
 // hide #persons-show
-$.ajax({
-  url: 'http://localhost:3000/persons',
-  type: "GET"
-}).then(function(response){
-  console.log("success");
-  $.hide('#persons-show');
-});
+// $.ajax({
+//   url: 'http://localhost:3000/persons',
+//   type: "GET"
+// }).then(function(response){
+//   console.log("success");
+//   $.hide('#persons-show');
+// });
 
 var getPersons = function() {
   $.ajax({
@@ -20,21 +20,14 @@ var getPersons = function() {
     type: "GET"
   }).then(function(response){
     console.log("success");
-    console.log(response);
     var personObjects = JSON.parse(response);
-  // console.log(personObjects);
-  testHandlebars(personObjects);
+  displayIndexPage(personObjects);
 });
 }
 
-var testHandlebars = function(personObjects){
-  // select script tag
-  // var theTemplateScript = $.select("#index-names");
-  // select text of script tag
+var displayIndexPage = function(personObjects){
   var theTemplateScript = $.select("#index-names").text;
-  // Compile the template
   var theTemplate = Handlebars.compile(theTemplateScript);
-  // Define our data object
   var persons = [];
   for (var i = 0; i < personObjects.length; i++){
     var context={
@@ -43,14 +36,44 @@ var testHandlebars = function(personObjects){
     };
     persons.push(context);
   };
-  // Pass our data to the template
   var wrapper = {objects: persons};
   var theCompiledHtml = theTemplate(wrapper);
-  debugger
-  // var parser = new DOMParser()
-  // var theCompiledHtmlDocObj = parser.parseFromString(theCompiledHtml, "text/xml")
-  // Add the compiled html to the page
-  // $.select('.content-placeholder').html(theCompiledHtml);
   $.select('.content-placeholder')[0].innerHTML = theCompiledHtml;
-  // debugger
+  nameListener();
+}
+
+var nameListener = function(){
+  $.on('.name-link','click',function(e){
+    e.preventDefault();
+    var id = parseInt(this.id);
+    getBadges(id);
+  })
+}
+
+var getBadges = function(id){
+  $.ajax({
+    url: "http://localhost:3000/persons/"+id,
+    type: "GET"
+  }).then(function(response){
+    console.log("getBadges success");
+    var badgeObjects = JSON.parse(response);
+  displayPersonShowPage(badgeObjects);
+});
+}
+
+var displayPersonShowPage = function(badgeObjects){
+  var theTemplateScript = $.select("#badges-handlebar").text;
+  var theTemplate = Handlebars.compile(theTemplateScript);
+  var badges = [];
+  for (var i = 0; i < badgeObjects.length; i++){
+    var context={
+      "text": badgeObjects[i].text,
+    };
+    badges.push(context);
+  };
+  var wrapper = {objects: badges};
+  var theCompiledHtml = theTemplate(wrapper);
+  $.select('.badges-placeholder')[0].innerHTML = theCompiledHtml;
+  // voteListener();
+  // homeListener();
 }
