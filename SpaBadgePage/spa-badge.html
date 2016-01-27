@@ -23,7 +23,13 @@
       </ul>
     </div>
   </div>
-  <div id="persons-show">
+
+
+<!--Your new content will be displayed in here-->
+<div class="content-placeholder"></div>
+
+
+  <div id="persons-show" style="display:none">
       <h1>Words To Be Remembered By</h1>
       <h2> Walker's Badges </h2>
 
@@ -53,32 +59,6 @@
         </div>
       </div>
 
-      <div id="2" class="slogan">
-        <div class="body">2) Most likely to do a handstand</div>
-        <div class="vote-on">
-          <form action="#">
-            <input type="hidden" name="slogan_id" value=1>
-            <input type="hidden" name="vote_type" value="up">
-            <button class="up" type="submit" name="submit">
-              <img src="img/upvote.gif" alt="upvote_image" />
-            </button>
-          </form>
-        </div>
-        <div class="vote-on">
-          <form action="#">
-            <input type="hidden" name="slogan_id" value=1>
-            <input type="hidden" name="vote_type" value="down">
-            <button class="down" type="submit" name="submit">
-                <img src="img/downvote.gif" alt="downvote_image" />
-            </button>
-          </form>
-        </div>
-
-        <div class="points">
-          (15 points)
-        </div>
-      </div>
-
       <div class="add-badge">
         <h3> Add a Badge: </h3>
         <form action="#">
@@ -90,5 +70,26 @@
   </div>
     <script src="js/miniQuery.js"></script>
     <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+    <script id="address-template" type="text/x-handlebars-template">
+  <p>You can find me in {{name}}. My address is {{number}} {{street}}.</p>
+</script>
+
+
+<script id="index-names" type="text/x-handlebars-template">
+<div id="persons-index">
+      <h1> SPA Badge </h1>
+    </div>
+    <h1> SF Teachers </h1>
+      <ul>
+      {{#each objects}}
+        <li><a id={{id}} href="#">{{name}}</a></li>
+      {{/each}}
+      </ul>
+    </div>
+  </div>
+</script>
+
+
 </body>
 </html>
