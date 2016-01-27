@@ -8,6 +8,7 @@
 
 Person.delete_all
 Badge.delete_all
+Vote.delete_all
 
 people = ["Anne","Derek","Hunter","Jen","Julian","Sarah","Shambhavi","Walker"]
 
@@ -27,5 +28,15 @@ end
   Badge.create!(unique_badge)
 end
 
+def new_vote
+  {
+    badge_id: rand(1..100),
+    value: [-1,1,1,1,1].sample
+  }
+end
+
+500.times do
+  Vote.create!(new_vote)
+end
 
 puts "DB seeded!!!!!!!!!!!"

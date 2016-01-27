@@ -5,11 +5,16 @@
 </head>
 <body>
 
-<div class="container">
+  <div class="container">
 
-<!--Your new content will be displayed in here-->
-<div class="content-placeholder"></div>
-</div>
+    <!--Your new content will be displayed in here-->
+    <div class="content-placeholder"></div>
+    <div class="person-show-container">
+    <h1 class="name-placeholder" style="display:none;" >Name: </h1>
+
+    <div class="badges-placeholder"> </div>
+    </div>
+  </div>
 
 <script id="index-names" type="text/x-handlebars-template">
 <div class="logo">
@@ -25,16 +30,14 @@
 </div>
 </script>
 
-<div class="badges-placeholder">
-</div>
 
 <script id="badges-handlebar" type="text/x-handlebars-template">
     <h1>Words To Be Remembered By</h1>
       <div class="show-user">
-    <h2> PERSON_NAME </h2>
       {{#each objects}}
-      <div id="1" class="slogan">
+      <div id={{badge_id}} class="slogan">
         <div class="body">{{text}}</div>
+
         <div class="vote-on">
           <form action="#">
             <input type="hidden" name="slogan_id" value=1>
@@ -53,19 +56,21 @@
             </button>
           </form>
         </div>
-        <div class="points">
-          (25 points)
+        <div class="points{{badge_id}}">
+          {{voteTotal}}
         </div>
       </div>
     {{/each}}
       <div class="add-badge">
         <h3> Add a Badge: </h3>
-        <form action="#">
-          <input type="hidden" name="user_id" value="5" />
+        <form action="#" name="new-badge-form" class="new-badge-form">
           <input type="text" name="content" />
-          <input type="image" src="img/add_button.png" alt="Add Slogan" />
+          <input id="submit-new-badge-button" type="submit" />
         </form>
       </div>
+      <span class="nav-link">
+        <a href="#">HOME</a>
+      </span>
 </script>
 
 

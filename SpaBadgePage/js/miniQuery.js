@@ -82,6 +82,11 @@ var miniQuery = (function(){
     }
   };
 
+  exports.closest = function(selectedItem, desiredClass){
+    while ((selectedItem = selectedItem.parentElement) && !selectedItem.classList.contains(desiredClass));
+    return selectedItem;
+  }
+
   exports.ajax = function(request){
     var promise = new Promise(function(resolve, reject){
       var client = new XMLHttpRequest();

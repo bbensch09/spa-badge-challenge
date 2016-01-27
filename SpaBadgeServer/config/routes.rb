@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
 resources :persons#, only[:index, :show]
-resources :badges#, only[:create]
-resources :votes#, only[:create]
+# resources :badges#, only[:create]
+# resources :votes#, only[:create]
+post 'votes/:badge_id/:vote_type' => 'votes#create'
+post 'badges/:person_id/:content' => 'badges#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
