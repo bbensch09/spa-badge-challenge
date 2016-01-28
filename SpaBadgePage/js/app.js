@@ -54,14 +54,7 @@ var getBadges = function(id){
   }).then(function(response){
     console.log("getBadges success");
     var badgeObjects = JSON.parse(response);
-
-    if (badgeObjects.length){
       displayPersonShowPage(badgeObjects);
-    }
-    else {
-
-    }
-
   });
 }
 
@@ -88,7 +81,6 @@ var displayPersonShowPage = function(badgeObjects){
   voteButtonListener();
   homeListener();
   badgeListener();
-  debugger
   $.addClass('.new-badge-form',badgeObjects[0].person_id);
 
 }
